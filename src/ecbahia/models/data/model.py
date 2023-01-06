@@ -9,7 +9,8 @@ from pydantic.dataclasses import dataclass
 class MyBet:
     capital: Decimal
     profit: Decimal
+    fee: Decimal
     amount: Optional[Decimal] = None
     time: Optional[int] = None
     descript: Optional[int] = None
-    fee: Decimal
+    is_multi: Optional[bool] = False

@@ -10,3 +10,4 @@ class MyBet(BaseModel):
     descript: Optional[str] = None
     time: Optional[int] = 1
     fee: Optional[Decimal] = Decimal("0.20")
+    is_multi: Optional[bool] = False

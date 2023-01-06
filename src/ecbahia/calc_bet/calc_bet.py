@@ -16,6 +16,7 @@ def profit(my_bet: BetRequest) -> BetResponse:
     bet_response.capital = my_bet.money
     bet_response.descript = my_bet.descript
     bet_response.time = my_bet.time
+    bet_response.is_multi = my_bet.is_multi
 
     return bet_response
 
@@ -23,17 +24,10 @@ def profit(my_bet: BetRequest) -> BetResponse:
 def amount(my_bet: BetRequest) -> BetResponse:
     my_profit = profit(my_bet=my_bet)
 
-    my_amount = my_profit.profit * my_bet.money
+    my_amount = my_profit.profit + my_bet.money
 
     my_amount = get_money(money=my_amount)
 
-    bet_response = BetResponse()
+    my_profit.amount = my_amount
 
-    bet_response.capital = my_bet.money
-    bet_response.fee = my_bet.fee
-    bet_response.profit = my_profit.profit
-    bet_response.amount = my_amount
-    bet_response.descript = my_bet.descript
-    bet_response.time = my_bet.time
-
-    return bet_response
+    return my_profit
