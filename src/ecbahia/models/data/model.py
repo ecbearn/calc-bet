@@ -1,3 +1,5 @@
+from typing import Optional
+
 from decimal import Decimal
 
 from pydantic.dataclasses import dataclass
@@ -7,5 +9,5 @@ from pydantic.dataclasses import dataclass
 class MyBet:
     capital: Decimal
     profit: Decimal
-    amount: Decimal
+    amount: Optional[Decimal] = None
     fee: Decimal
