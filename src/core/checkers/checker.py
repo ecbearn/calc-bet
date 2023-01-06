@@ -29,3 +29,7 @@ class MyBetChecker:
     @classmethod
     def is_string(cls, word: str) -> bool:
         return isinstance(word, str)
+
+    @classmethod
+    def is_str_greater(cls, word: str, length: int = 0) -> bool:
+        return len(word) > length
