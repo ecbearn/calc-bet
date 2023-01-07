@@ -43,7 +43,7 @@ def post_profit(my_bet: BetRequest) -> HTMLResponse:
 @calc_bet_api.post(path=link.post_amount, response_model=BetResponse)
 def post_amount(my_bet: BetRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet)
+        Checker.checker(my_bet=my_bet, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
@@ -77,7 +77,7 @@ def post_multi_bet(my_bets: MyBetMulti) -> HTMLResponse:
 @calc_bet_api.post(path=link.post_profits, response_model=BetResponse)
 def post_profits(my_bet: BetRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet)
+        Checker.checker(my_bet=my_bet, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
