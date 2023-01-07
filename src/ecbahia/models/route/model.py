@@ -16,4 +16,4 @@ class Winner(BaseModel):
 class WinnerMulti(BaseModel):
     money: Decimal = Decimal("0.00")
     min_money: Decimal = Decimal("0.50")
-    my_bets: List[Winner]
+    my_earnings: List[Winner]

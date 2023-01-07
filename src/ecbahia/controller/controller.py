@@ -35,10 +35,10 @@ class MyBetValidator:
         if BetChk.money_smaller(money=my_bets.money, cash=my_bets.min_money):
             raise ValueError("error: your bet doesn't match the minimal value.")
 
-        elif len(my_bets.my_bets) == 0:
+        elif len(my_bets.my_earnings) == 0:
             raise ValueError("error: you don't have any odd to calculate.")
 
-        checker = map(lambda e: e.earn_rate < Decimal("1.00") or not e.is_multi, my_bets.my_bets)
+        checker = map(lambda e: e.earn_rate < Decimal("1.00") or not e.is_multi, my_bets.my_earnings)
 
         if next(checker):
             raise ValueError(f"error: it was found a invalid bet odd.")
