@@ -16,12 +16,7 @@ class Calculate:
 
     @classmethod
     def post_amount(cls, my_bet: BetRequest) -> BetResponse:
-        bet_response: BetResponse = BetResponse()
-
-        for time in range(my_bet.time):
-            bet_response = amount(my_bet=my_bet)
-
-            my_bet.money = bet_response.amount
+        bet_response = amount(my_bet=my_bet)
 
         return bet_response
 

@@ -6,7 +6,7 @@ from src.ecbahia.models.route.model import MyBet
 
 
 def multiply_list(my_odds: List[MyBet]) -> Decimal:
-    all_ods = [bet.fee for bet in my_odds]
+    all_ods = [bet.odd for bet in my_odds]
 
     multi_odds = Decimal("1.00")
 
