@@ -25,3 +25,13 @@ class Calculate:
         bet_response = multi_bet(my_bets=my_bets)
 
         return bet_response
+
+    @classmethod
+    def post_profits(cls, my_bet: BetRequest) -> BetResponse:
+        bet_response = BetResponse(
+            capital="0",
+            profit="0",
+            odd="0"
+        )
+
+        return bet_response

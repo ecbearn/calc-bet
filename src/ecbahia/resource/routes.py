@@ -95,3 +95,13 @@ def post_profits(my_bet: BetRequest) -> HTMLResponse:
             status_code=400,
             detail={"msg": ve.args[0]}
         )
+
+    bet_response = Profit.post_profits(my_bet=my_bet)
+
+    response = HTMLResponse(
+        media_type=APP_JSON,
+        status_code=201,
+        content=bet_response.as_json()
+    )
+
+    return response
