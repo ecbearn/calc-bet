@@ -1,33 +1,36 @@
-from src.ecbahia.calc_bet.calc_bet import (
-    profit, amount, multi_bet, profits
+from src.ecbahia.earner.earner import (
+    invest, amounts, multi_earning, invests
 )
 
-from src.ecbahia.models.route.model import MyBet as BetRequest
-from src.ecbahia.models.data.model import MyBet as BetResponse
-from src.ecbahia.models.route.model import MyBetMulti
+from src.ecbahia.models.route.model import Winner as WinRequest
+from src.ecbahia.models.data.model import Winner as WinResponse
+from src.ecbahia.models.route.model import WinnerMulti
+from src.ecbahia.routes.endpoints import Endpoints
+
+e = Endpoints()
 
 
 class Calculate:
     @classmethod
-    def post_profit(cls, my_bet: BetRequest) -> BetResponse:
-        bet_response = profit(my_bet=my_bet)
+    def post_earning(cls, winner: WinRequest) -> WinResponse:
+        win_response = invest(winner=winner)
 
-        return bet_response
-
-    @classmethod
-    def post_amount(cls, my_bet: BetRequest) -> BetResponse:
-        bet_response = amount(my_bet=my_bet)
-
-        return bet_response
+        return win_response
 
     @classmethod
-    def post_multi_bet(cls, my_bets: MyBetMulti) -> BetResponse:
-        bet_response = multi_bet(my_bets=my_bets)
+    def post_amounts(cls, winner: WinRequest) -> WinResponse:
+        win_response = amounts(winner=winner)
 
-        return bet_response
+        return win_response
 
     @classmethod
-    def post_profits(cls, my_bet: BetRequest) -> BetResponse:
-        bet_response = profits(my_bet=my_bet)
+    def post_multi_earnings(cls, winners: WinnerMulti) -> WinResponse:
+        win_response = multi_earning(winners=winners)
 
-        return bet_response
+        return win_response
+
+    @classmethod
+    def post_earnings(cls, winner: WinRequest) -> WinResponse:
+        win_response = invests(winner=winner)
+
+        return win_response

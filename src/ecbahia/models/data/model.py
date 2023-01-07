@@ -8,10 +8,10 @@ from pydantic.dataclasses import dataclass
 
 
 @dataclass
-class MyBet:
+class Winner:
     capital: Decimal
-    profit: Decimal
-    odd: Decimal
+    lucre_up: Decimal
+    earn_rate: Decimal
     amount: Optional[Decimal] = None
     time: Optional[int] = None
     descript: Optional[str] = None

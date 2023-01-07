@@ -1,7 +1,7 @@
 from decimal import Decimal
 
 
-class MyBetChecker:
+class InvestChecker:
     @classmethod
     def money_smaller(cls, money: Decimal, cash: Decimal = Decimal("0.00")) -> bool:
         return money < cash
