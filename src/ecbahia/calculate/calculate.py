@@ -1,5 +1,5 @@
 from src.ecbahia.calc_bet.calc_bet import (
-    profit, amount, multi_bet
+    profit, amount, multi_bet, profits
 )
 
 from src.ecbahia.models.route.model import MyBet as BetRequest
@@ -28,10 +28,6 @@ class Calculate:
 
     @classmethod
     def post_profits(cls, my_bet: BetRequest) -> BetResponse:
-        bet_response = BetResponse(
-            capital="0",
-            profit="0",
-            odd="0"
-        )
+        bet_response = profits(my_bet=my_bet)
 
         return bet_response

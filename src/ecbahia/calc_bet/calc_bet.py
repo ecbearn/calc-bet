@@ -63,3 +63,7 @@ def multi_bet(my_bets: MyBetMulti) -> BetResponse:
     bet_response.amount = total_amount
 
     return bet_response
+
+
+def profits(my_bet: BetRequest) -> BetResponse:
+    return BetResponse()

@@ -15,6 +15,10 @@ class MyBetValidator:
             elif not BetChk.is_str_greater(word=my_bet.descript):
                 raise ValueError("error: descript must be greater than 0.")
 
+        elif my_bet.is_multi:
+            if not BetChk.time_greater(time=my_bet.time, temp=1):
+                raise ValueError("error: time mut be greater than 1 for is_multi true.")
+
         elif BetChk.time_equals(time=my_bet.time):
             raise ValueError("error: time must be greater than 0.")
 
