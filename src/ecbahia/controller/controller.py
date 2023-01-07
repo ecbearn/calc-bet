@@ -20,7 +20,7 @@ class MyBetValidator:
 
         elif not BetChk.money_greater(money=my_bet.money):
             raise ValueError("error: money must be greater than 0.")
-        elif not BetChk.money_greater(money=my_bet.fee):
+        elif not BetChk.money_greater(money=my_bet.odd):
             raise ValueError("error: fee must be greater than 0.")
 
     @classmethod
@@ -31,8 +31,7 @@ class MyBetValidator:
         elif len(my_bets.my_bets) == 0:
             raise ValueError("error: you don't have any odd to calculate.")
 
-        checker = map(lambda e: e.fee > Decimal("0.99") and e.is_multi, my_bets.my_bets)
-        checker = tuple(c for c in checker)
+        checker = map(lambda e: e.odd < Decimal("1.00") or not e.is_multi, my_bets.my_bets)
 
-        if len(checker) < 1:
-            raise ValueError("error: it was found a invalid bet odd.")
+        if next(checker):
+            raise ValueError(f"error: it was found a invalid bet odd.")

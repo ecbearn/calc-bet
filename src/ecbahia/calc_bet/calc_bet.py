@@ -8,30 +8,37 @@ from src.ecbahia.models.route.model import MyBetMulti
 
 
 def profit(my_bet: BetRequest) -> BetResponse:
-    my_profit = my_bet.money * my_bet.fee
+    my_profit = my_bet.money * my_bet.odd
+    my_profit = get_money(my_profit)
 
-    my_profit = get_money(money=my_profit)
+    my_amount = my_bet.money + my_profit
+    my_amount = get_money(my_amount)
 
-    bet_response = BetResponse()
+    bet_response = BetResponse(
+        capital=my_bet.money,
+        profit=my_profit,
+        odd=my_bet.odd
+    )
 
-    bet_response.profit = my_profit
-    bet_response.fee = my_bet.fee
-    bet_response.capital = my_bet.money
     bet_response.descript = my_bet.descript
     bet_response.time = my_bet.time
     bet_response.is_multi = my_bet.is_multi
+    bet_response.amount = my_amount
 
     return bet_response
 
 
 def amount(my_bet: BetRequest) -> BetResponse:
-    my_profit = profit(my_bet=my_bet)
+    my_profit: BetResponse = BetResponse(
+        capital="0",
+        profit="0",
+        odd="0"
+    )
 
-    my_amount = my_profit.profit + my_bet.money
+    for time in range(my_bet.time):
+        my_profit = profit(my_bet=my_bet)
 
-    my_amount = get_money(money=my_amount)
-
-    my_profit.amount = my_amount
+        my_bet.money = my_profit.amount
 
     return my_profit
 
@@ -39,19 +46,20 @@ def amount(my_bet: BetRequest) -> BetResponse:
 def multi_bet(my_bets: MyBetMulti) -> BetResponse:
     multi_ods = multiply_list(my_odds=my_bets.my_bets)
 
-    bet_response = BetResponse()
-    bet_response.is_multi = True
-    bet_response.descript = "This is a Multiply Bet!"
-    bet_response.fee = multi_ods
-    bet_response.capital = my_bets.money
-
-    total_amount = bet_response.fee * bet_response.capital
-    total_amount = get_money(total_amount)
-
-    total_profit = total_amount - bet_response.capital
+    total_profit = multi_ods * my_bets.money
     total_profit = get_money(total_profit)
 
+    total_amount = my_bets.money + total_profit
+    total_amount = get_money(total_amount)
+
+    bet_response = BetResponse(
+        capital=my_bets.money,
+        profit=total_profit,
+        odd=multi_ods
+    )
+
+    bet_response.is_multi = True
+    bet_response.descript = "This is a Multiply Bet!"
     bet_response.amount = total_amount
-    bet_response.profit = total_profit
 
     return bet_response
