@@ -1,7 +1,9 @@
-# Calc Bet API
-Calculates the profits to your bets with this API. Today, websites to make bets are commons
-at internet and a lot of people play on them. So, what do you think about do simulators to
-make your bets? 
+# Lucrative API
+Calculates the winnings to your investments with this API. Actually, a lot of people invest around the world. No
+matter if it is about cryptocurrencies or stock exchanges. But, how to manage a way to simulate your potential
+winning at the market by the time?
+
+The only thing you need is to enter required data and our API returns to you the result like a function concept.
 
 *That's the reason because I created this API.*
 
@@ -43,10 +45,10 @@ Here you find a `.json` with all links of this API.
 
 ```json
 {
-  "post_profit": "/api/calc-bet/profit",
-  "post_profits": "/api/calc-bet/profits",
-  "post_amount": "/api/calc-bet/amount",
-  "post_multi_bet": "/api/calc-bet/multi-bet"
+  "post_profit": "/api/lucrative/profit",
+  "post_profits": "/api/lucrative/profits",
+  "post_amount": "/api/lucrative/amount",
+  "post_multi_bet": "/api/lucrative/multi-bet"
 }
 ```
 
