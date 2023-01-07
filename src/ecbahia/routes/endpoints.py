@@ -1,14 +1,14 @@
 from pydantic.dataclasses import dataclass
 
 
-PREFIX = "/api/calc-bet"
+PREFIX = "/api/lucrative"
 
 
 @dataclass
 class Endpoints:
-    post_profit = f"{PREFIX}/profit"
-    post_amount = f"{PREFIX}/amount"
+    post_earning = f"{PREFIX}/earning"
+    post_amounts = f"{PREFIX}/amounts"
 
-    post_multi_bet = f"{PREFIX}/multi-bet"
+    post_multi_earnings = f"{PREFIX}/multi-earnings"
 
-    post_profits = f"{PREFIX}/profits"
+    post_earnings = f"{PREFIX}/earnings"
