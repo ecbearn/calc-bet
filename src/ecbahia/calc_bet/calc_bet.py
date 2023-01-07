@@ -63,3 +63,35 @@ def multi_bet(my_bets: MyBetMulti) -> BetResponse:
     bet_response.amount = total_amount
 
     return bet_response
+
+
+def profits(my_bet: BetRequest) -> BetResponse:
+    my_amount = get_money()
+    my_profit = get_money()
+
+    total_profit = get_money()
+
+    total_amount = my_bet.money
+    total_amount = get_money(money=total_amount)
+
+    for time in range(my_bet.time):
+        my_profit = my_bet.money * my_bet.odd
+        my_profit = get_money(money=my_profit)
+
+        total_profit += my_profit
+        total_profit = get_money(total_profit)
+
+        total_amount += my_profit
+        total_amount = get_money(total_amount)
+
+    bet_response: BetResponse = BetResponse(
+        capital=my_bet.money,
+        profit=total_profit,
+        odd=my_bet.odd
+    )
+
+    bet_response.amount = total_amount
+    bet_response.is_multi = my_bet.is_multi
+    bet_response.descript = "Income fixed Money!"
+
+    return bet_response

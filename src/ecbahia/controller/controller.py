@@ -7,13 +7,20 @@ from src.core.checkers.checker import MyBetChecker as BetChk
 
 class MyBetValidator:
     @classmethod
-    def checker(cls, my_bet: MyBet) -> None:
+    def checker(cls, my_bet: MyBet, is_multi: bool = False) -> None:
         if my_bet.descript is not None:
             if not BetChk.is_string(word=my_bet.descript):
                 raise ValueError("error: descript must be an string.")
 
-        if not BetChk.is_str_greater(word=my_bet.descript):
-            raise ValueError("error: descript must be greater than 0.")
+            elif not BetChk.is_str_greater(word=my_bet.descript):
+                raise ValueError("error: descript must be greater than 0.")
+
+        elif is_multi:
+            if not my_bet.is_multi:
+                raise ValueError("error: is_multi parameter must be true.")
+
+            elif not BetChk.time_greater(time=my_bet.time, temp=1):
+                raise ValueError("error: time parameter must be greater than 1 for is_multi true.")
 
         elif BetChk.time_equals(time=my_bet.time):
             raise ValueError("error: time must be greater than 0.")

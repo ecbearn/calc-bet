@@ -1,6 +1,10 @@
 from fastapi import APIRouter
-from fastapi.exceptions import HTTPException
 from fastapi.responses import HTMLResponse
+
+from src.core.utils.response import (
+    get_html_response,
+    raise_http_exception
+)
 
 from src.ecbahia.routes.endpoints import Endpoints
 
@@ -24,19 +28,13 @@ def post_profit(my_bet: BetRequest) -> HTMLResponse:
     try:
         Checker.checker(my_bet=my_bet)
     except ValueError as ve:
-        raise HTTPException(
-            status_code=400,
-            detail={"msg": ve.args[0]}
-        )
+        raise_http_exception(message=ve.args[0])
 
     bet_response = Profit.post_profit(my_bet=my_bet)
 
-    response = HTMLResponse(
-        media_type=APP_JSON,
+    response = get_html_response(
         status_code=201,
-        content=str(
-            bet_response.as_json()
-        )
+        content=bet_response.to_dict()
     )
 
     return response
@@ -45,21 +43,15 @@ def post_profit(my_bet: BetRequest) -> HTMLResponse:
 @calc_bet_api.post(path=link.post_amount, response_model=BetResponse)
 def post_amount(my_bet: BetRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet)
+        Checker.checker(my_bet=my_bet, is_multi=True)
     except ValueError as ve:
-        raise HTTPException(
-            status_code=400,
-            detail={"msg": ve.args[0]}
-        )
+        raise_http_exception(message=ve.args[0])
 
     bet_response = Profit.post_amount(my_bet=my_bet)
 
-    response = HTMLResponse(
-        media_type=APP_JSON,
+    response = get_html_response(
         status_code=201,
-        content=str(
-            bet_response.as_json()
-        )
+        content=bet_response.to_dict()
     )
 
     return response
@@ -70,17 +62,30 @@ def post_multi_bet(my_bets: MyBetMulti) -> HTMLResponse:
     try:
         Checker.checker_bet_multi(my_bets=my_bets)
     except ValueError as ve:
-        raise HTTPException(
-            status_code=400,
-            detail={"msg": ve.args[0]}
-        )
+        raise_http_exception(message=ve.args[0])
 
     bet_response = Profit.post_multi_bet(my_bets=my_bets)
 
-    response = HTMLResponse(
-        media_type=APP_JSON,
+    response = get_html_response(
         status_code=201,
-        content=bet_response.as_json()
+        content=bet_response.to_dict()
+    )
+
+    return response
+
+
+@calc_bet_api.post(path=link.post_profits, response_model=BetResponse)
+def post_profits(my_bet: BetRequest) -> HTMLResponse:
+    try:
+        Checker.checker(my_bet=my_bet, is_multi=True)
+    except ValueError as ve:
+        raise_http_exception(message=ve.args[0])
+
+    bet_response = Profit.post_profits(my_bet=my_bet)
+
+    response = get_html_response(
+        status_code=201,
+        content=bet_response.to_dict()
     )
 
     return response

@@ -10,3 +10,5 @@ class Endpoints:
     post_amount = f"{PREFIX}/amount"
 
     post_multi_bet = f"{PREFIX}/multi-bet"
+
+    post_profits = f"{PREFIX}/profits"
