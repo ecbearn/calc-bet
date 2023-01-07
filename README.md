@@ -22,12 +22,12 @@ page we've a **Links FAQ** to help you to install them.
 
 ```json
 {
-  "Python_3": "Our Chosen Programming Language.",
-  "Virtualenv": "Project Local Python Interpreter.",
-  "Pip": "Manage and install packages to your .venv",
-  "FastAPI": "Our Used API Model.",
-  "Uvicorn": "Our Server to Test Our API.",
-  "Pydantic": "Our Library to Use as a Request Model."
+   "Python_3": "Our Chosen Programming Language.",
+   "Virtualenv": "Project Local Python Interpreter.",
+   "Pip": "Manage and install packages to your .venv",
+   "FastAPI": "Our Used API Model.",
+   "Uvicorn": "Our Server to Test Our API.",
+   "Pydantic": "Our Library to Use as a Request Model."
 }
 ```
 
@@ -45,10 +45,10 @@ Here you find a `.json` with all links of this API.
 
 ```json
 {
-  "post-earning": "/api/lucrative/earning",
-  "post-earnings": "/api/lucrative/earnings",
-  "post-amounts": "/api/lucrative/amounts",
-  "post-multi-earnings": "/api/lucrative/multi-earnings"
+   "post-earning": "/api/lucrative/earning",
+   "post-earnings": "/api/lucrative/earnings",
+   "post-amounts": "/api/lucrative/amounts",
+   "post-multi-earnings": "/api/lucrative/multi-earnings"
 }
 ```
 
@@ -59,11 +59,11 @@ In general we have **2** standards to our requests bodies. They are:
 > `post-earning` and `post-earnings` and `post-amounts`
 ```json
 {
-  "money": 0,
-  "descript": "string",
-  "time": 1,
-  "earn_rate": 0.2,
-  "is_multi": false
+   "money": 0,
+   "descript": "string",
+   "time": 1,
+   "earn_rate": 0.2,
+   "is_multi": false
 }
 ```
 
@@ -82,14 +82,14 @@ In general we have **2** standards to our requests bodies. They are:
 > `post-multi-earnings`
 ```json
 {
-   "money": 0, 
-   "min_money": 0.5, 
+   "money": 0,
+   "min_money": 0.5,
    "my_earnings": [
       {
-         "money": 0, 
-         "descript": "string", 
-         "time": 1, 
-         "earn_rate": 0.2, 
+         "money": 0,
+         "descript": "string",
+         "time": 1,
+         "earn_rate": 0.2,
          "is_multi": false
       }
    ]
@@ -104,7 +104,7 @@ Now I present the specifics request bodies from context.
 > `post-earning`
 ```json
 {
-   "money": 1000, 
+   "money": 1000,
    "earn_rate": 0.2
 }
 ```
@@ -112,9 +112,9 @@ Now I present the specifics request bodies from context.
 > `post-earnings` Note: `time > 1 and is_multi == true` **required** always.
 ```json
 {
-   "money": 100, 
-   "earn_rate": 0.05, 
-   "time": 3000, 
+   "money": 100,
+   "time": 3000,
+   "earn_rate": 0.05,
    "is_multi": true
 }
 ```
@@ -122,9 +122,9 @@ Now I present the specifics request bodies from context.
 > `post-amounts` Note: `time > 1 and is_multi == true` **required** always.
 ```json
 {
-   "money": 100, 
-   "time": 2, 
-   "odd": 0.2, 
+   "money": 100,
+   "time": 3000,
+   "earn_rate": 0.05,
    "is_multi": true
 }
 ```
@@ -132,11 +132,11 @@ Now I present the specifics request bodies from context.
 > `post-multi-earnings` Note: `is_mult == true` **required** always.
 ```json
 {
-   "money": 10, 
-   "min_money": 0.5, 
+   "money": 10,
+   "min_money": 0.5,
    "my_earnings": [
       {
-         "earn_rate": 1.2, 
+         "earn_rate": 1.2,
          "is_multi": true
       }
    ]
@@ -148,13 +148,13 @@ Here I present to you our response model. It's basically a `.json`.
 
 ```json
 {
-  "capital": 0.00,
-  "lucre_up": 0.00,
-  "earn_rate": 0.00,
-  "amount": 0.00,
-  "time": 0.00,
-  "descript": "string",
-  "is_multi": false
+   "capital": 0.00,
+   "lucre_up": 0.00,
+   "earn_rate": 0.00,
+   "amount": 0.00,
+   "time": 0.00,
+   "descript": "string",
+   "is_multi": false
 }
 ```
 
