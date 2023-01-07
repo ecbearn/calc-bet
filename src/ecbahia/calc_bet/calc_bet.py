@@ -75,10 +75,7 @@ def profits(my_bet: BetRequest) -> BetResponse:
     total_amount = get_money(money=total_amount)
 
     for time in range(my_bet.time):
-        my_amount = my_bet.money * my_bet.odd
-        my_amount = get_money(money=my_amount)
-
-        my_profit = my_amount - my_bet.money
+        my_profit = my_bet.money * my_bet.odd
         my_profit = get_money(money=my_profit)
 
         total_profit += my_profit

@@ -20,7 +20,7 @@ class MyBetValidator:
                 raise ValueError("error: is_multi parameter must be true.")
 
             elif not BetChk.time_greater(time=my_bet.time, temp=1):
-                raise ValueError("error: time mut be greater than 1 for is_multi true.")
+                raise ValueError("error: time parameter must be greater than 1 for is_multi true.")
 
         elif BetChk.time_equals(time=my_bet.time):
             raise ValueError("error: time must be greater than 0.")
