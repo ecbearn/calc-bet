@@ -28,7 +28,7 @@ def post_earning(winner: WinRequest) -> HTMLResponse:
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_profit(my_bet=winner)
+    earn_response = Earn.post_earning(winner=winner)
 
     response = get_html_response(
         status_code=201,
@@ -45,7 +45,7 @@ def post_amounts(winner: WinRequest) -> HTMLResponse:
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_amount(my_bet=winner)
+    earn_response = Earn.post_amounts(winner=winner)
 
     response = get_html_response(
         status_code=201,
@@ -62,7 +62,7 @@ def post_multi_earnings(winners: WinnerMulti) -> HTMLResponse:
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_multi_bet(my_bets=winners)
+    earn_response = Earn.post_multi_earnings(winners=winners)
 
     response = get_html_response(
         status_code=201,
@@ -73,13 +73,13 @@ def post_multi_earnings(winners: WinnerMulti) -> HTMLResponse:
 
 
 @calc_bet_api.post(path=link.post_earnings, response_model=WinResponse)
-def post_earnings(my_bet: WinRequest) -> HTMLResponse:
+def post_earnings(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet, is_multi=True)
+        Checker.checker(my_bet=winner, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_profits(my_bet=my_bet)
+    earn_response = Earn.post_earnings(winner=winner)
 
     response = get_html_response(
         status_code=201,
