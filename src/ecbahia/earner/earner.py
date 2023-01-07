@@ -16,7 +16,7 @@ def invest(winner: WinRequest) -> WinResponse:
 
     win_response = WinResponse(
         capital=winner.money,
-        profit=my_earn,
+        lucre_up=my_earn,
         earn_rate=winner.earn_rate
     )
 
@@ -31,7 +31,7 @@ def invest(winner: WinRequest) -> WinResponse:
 def amounts(winner: WinRequest) -> WinResponse:
     my_earn: WinResponse = WinResponse(
         capital="0",
-        profit="0",
+        lucre_up="0",
         earn_rate="0"
     )
 
@@ -54,7 +54,7 @@ def multi_earning(winners: WinnerMulti) -> WinResponse:
 
     win_response = WinResponse(
         capital=winners.money,
-        profit=total_earn,
+        lucre_up=total_earn,
         earn_rate=multi_rates
     )
 
@@ -86,7 +86,7 @@ def invests(winner: WinRequest) -> WinResponse:
 
     win_response: WinResponse = WinResponse(
         capital=winner.money,
-        profit=total_earn,
+        lucre_up=total_earn,
         earn_rate=winner.earn_rate
     )
 

@@ -10,7 +10,7 @@ from pydantic.dataclasses import dataclass
 @dataclass
 class Winner:
     capital: Decimal
-    profit: Decimal
+    lucre_up: Decimal
     earn_rate: Decimal
     amount: Optional[Decimal] = None
     time: Optional[int] = None
