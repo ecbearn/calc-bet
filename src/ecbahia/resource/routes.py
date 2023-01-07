@@ -12,19 +12,19 @@ from src.ecbahia.models.route.model import Winner as WinRequest
 from src.ecbahia.models.data.model import Winner as WinResponse
 from src.ecbahia.models.route.model import WinnerMulti
 
-from src.ecbahia.controller.controller import MyBetValidator as Checker
+from src.ecbahia.controller.controller import WinnerValidator as Checker
 
 from src.ecbahia.calculate.calculate import Calculate as Earn
 
 
-calc_bet_api = APIRouter()
+lucrative_api = APIRouter()
 link = Endpoints()
 
 
-@calc_bet_api.post(path=link.post_earning, response_model=WinResponse)
+@lucrative_api.post(path=link.post_earning, response_model=WinResponse)
 def post_earning(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=winner)
+        Checker.checker(winner=winner)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
@@ -38,10 +38,10 @@ def post_earning(winner: WinRequest) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_amounts, response_model=WinResponse)
+@lucrative_api.post(path=link.post_amounts, response_model=WinResponse)
 def post_amounts(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=winner, is_multi=True)
+        Checker.checker(winner=winner, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
@@ -55,10 +55,10 @@ def post_amounts(winner: WinRequest) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_multi_earnings, response_model=WinResponse)
+@lucrative_api.post(path=link.post_multi_earnings, response_model=WinResponse)
 def post_multi_earnings(winners: WinnerMulti) -> HTMLResponse:
     try:
-        Checker.checker_bet_multi(my_bets=winners)
+        Checker.checker_multi_earn(winners=winners)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
@@ -72,10 +72,10 @@ def post_multi_earnings(winners: WinnerMulti) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_earnings, response_model=WinResponse)
+@lucrative_api.post(path=link.post_earnings, response_model=WinResponse)
 def post_earnings(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=winner, is_multi=True)
+        Checker.checker(winner=winner, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
