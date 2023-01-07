@@ -84,3 +84,14 @@ def post_multi_bet(my_bets: MyBetMulti) -> HTMLResponse:
     )
 
     return response
+
+
+@calc_bet_api.post(path=link.post_profits, response_model=BetResponse)
+def post_profits(my_bet: BetRequest) -> HTMLResponse:
+    try:
+        Checker.checker(my_bet=my_bet)
+    except ValueError as ve:
+        raise HTTPException(
+            status_code=400,
+            detail={"msg": ve.args[0]}
+        )
