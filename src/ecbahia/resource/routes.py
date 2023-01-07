@@ -8,29 +8,27 @@ from src.core.utils.response import (
 
 from src.ecbahia.routes.endpoints import Endpoints
 
-from src.ecbahia.models.route.model import MyBet as BetRequest
-from src.ecbahia.models.data.model import MyBet as BetResponse
-from src.ecbahia.models.route.model import MyBetMulti
+from src.ecbahia.models.route.model import Winner as WinRequest
+from src.ecbahia.models.data.model import Winner as WinResponse
+from src.ecbahia.models.route.model import WinnerMulti
 
 from src.ecbahia.controller.controller import MyBetValidator as Checker
 
 from src.ecbahia.calculate.calculate import Calculate as Earn
 
 
-APP_JSON = "application/json"
-
 calc_bet_api = APIRouter()
 link = Endpoints()
 
 
-@calc_bet_api.post(path=link.post_earning, response_model=BetResponse)
-def post_earning(my_bet: BetRequest) -> HTMLResponse:
+@calc_bet_api.post(path=link.post_earning, response_model=WinResponse)
+def post_earning(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet)
+        Checker.checker(my_bet=winner)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_profit(my_bet=my_bet)
+    earn_response = Earn.post_profit(my_bet=winner)
 
     response = get_html_response(
         status_code=201,
@@ -40,14 +38,14 @@ def post_earning(my_bet: BetRequest) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_amounts, response_model=BetResponse)
-def post_amounts(my_bet: BetRequest) -> HTMLResponse:
+@calc_bet_api.post(path=link.post_amounts, response_model=WinResponse)
+def post_amounts(winner: WinRequest) -> HTMLResponse:
     try:
-        Checker.checker(my_bet=my_bet, is_multi=True)
+        Checker.checker(my_bet=winner, is_multi=True)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_amount(my_bet=my_bet)
+    earn_response = Earn.post_amount(my_bet=winner)
 
     response = get_html_response(
         status_code=201,
@@ -57,14 +55,14 @@ def post_amounts(my_bet: BetRequest) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_multi_earnings, response_model=BetResponse)
-def post_multi_earnings(my_bets: MyBetMulti) -> HTMLResponse:
+@calc_bet_api.post(path=link.post_multi_earnings, response_model=WinResponse)
+def post_multi_earnings(winners: WinnerMulti) -> HTMLResponse:
     try:
-        Checker.checker_bet_multi(my_bets=my_bets)
+        Checker.checker_bet_multi(my_bets=winners)
     except ValueError as ve:
         raise_http_exception(message=ve.args[0])
 
-    earn_response = Earn.post_multi_bet(my_bets=my_bets)
+    earn_response = Earn.post_multi_bet(my_bets=winners)
 
     response = get_html_response(
         status_code=201,
@@ -74,8 +72,8 @@ def post_multi_earnings(my_bets: MyBetMulti) -> HTMLResponse:
     return response
 
 
-@calc_bet_api.post(path=link.post_earnings, response_model=BetResponse)
-def post_earnings(my_bet: BetRequest) -> HTMLResponse:
+@calc_bet_api.post(path=link.post_earnings, response_model=WinResponse)
+def post_earnings(my_bet: WinRequest) -> HTMLResponse:
     try:
         Checker.checker(my_bet=my_bet, is_multi=True)
     except ValueError as ve:

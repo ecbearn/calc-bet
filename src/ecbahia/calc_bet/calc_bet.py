@@ -2,13 +2,13 @@ from src.core.money.money import get_money
 
 from src.core.utils.multiply import multiply_list
 
-from src.ecbahia.models.data.model import MyBet as BetResponse
-from src.ecbahia.models.route.model import MyBet as BetRequest
-from src.ecbahia.models.route.model import MyBetMulti
+from src.ecbahia.models.data.model import Winner as BetResponse
+from src.ecbahia.models.route.model import Winner as BetRequest
+from src.ecbahia.models.route.model import WinnerMulti
 
 
 def profit(my_bet: BetRequest) -> BetResponse:
-    my_profit = my_bet.money * my_bet.odd
+    my_profit = my_bet.money * my_bet.earn_rate
     my_profit = get_money(my_profit)
 
     my_amount = my_bet.money + my_profit
@@ -17,7 +17,7 @@ def profit(my_bet: BetRequest) -> BetResponse:
     bet_response = BetResponse(
         capital=my_bet.money,
         profit=my_profit,
-        odd=my_bet.odd
+        odd=my_bet.earn_rate
     )
 
     bet_response.descript = my_bet.descript
@@ -43,7 +43,7 @@ def amount(my_bet: BetRequest) -> BetResponse:
     return my_profit
 
 
-def multi_bet(my_bets: MyBetMulti) -> BetResponse:
+def multi_bet(my_bets: WinnerMulti) -> BetResponse:
     multi_ods = multiply_list(my_odds=my_bets.my_bets)
 
     total_profit = multi_ods * my_bets.money
@@ -75,7 +75,7 @@ def profits(my_bet: BetRequest) -> BetResponse:
     total_amount = get_money(money=total_amount)
 
     for time in range(my_bet.time):
-        my_profit = my_bet.money * my_bet.odd
+        my_profit = my_bet.money * my_bet.earn_rate
         my_profit = get_money(money=my_profit)
 
         total_profit += my_profit
@@ -87,7 +87,7 @@ def profits(my_bet: BetRequest) -> BetResponse:
     bet_response: BetResponse = BetResponse(
         capital=my_bet.money,
         profit=total_profit,
-        odd=my_bet.odd
+        odd=my_bet.earn_rate
     )
 
     bet_response.amount = total_amount
