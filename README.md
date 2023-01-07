@@ -9,6 +9,7 @@ make your bets?
 1. [Dependencies](#dependencies)
 2. [Endpoints](#endpoints)
    * [Request's Body](#requests-body)
+   * [Specifics Requests Bodies](#specifics-request-bodies)
 3. [Response Body](#requests-body)
 4. [Links FAQ](#links-faq)
 5. [Index Contents](#index-contents)
@@ -19,12 +20,12 @@ page we've a **Links FAQ** to help you to install them.
 
 ```json
 {
-    "Python_3": "Our Chosen Programming Language.",
-    "Virtualenv": "Project Local Python Interpreter.",
-    "Pip": "Manage and install packages to your .venv",
-    "FastAPI": "Our Used API Model.",
-    "Uvicorn": "Our Server to Test Our API.",
-    "Pydantic": "Our Library to Use as a Request Model."
+  "Python_3": "Our Chosen Programming Language.",
+  "Virtualenv": "Project Local Python Interpreter.",
+  "Pip": "Manage and install packages to your .venv",
+  "FastAPI": "Our Used API Model.",
+  "Uvicorn": "Our Server to Test Our API.",
+  "Pydantic": "Our Library to Use as a Request Model."
 }
 ```
 
@@ -38,12 +39,124 @@ page we've a **Links FAQ** to help you to install them.
 
 ## Endpoints
 
+Here you find a `.json` with all links of this API.
+
+```json
+{
+  "post_profit": "/api/calc-bet/profit",
+  "post_profits": "/api/calc-bet/profits",
+  "post_amount": "/api/calc-bet/amount",
+  "post_multi_bet": "/api/calc-bet/multi-bet"
+}
+```
+
 ### Request's Body
 
+In general we have **2** standards to our requests bodies. They are:
+
+> `post_profit` and `post_profits` and `post_amount`
+```json
+{
+  "money": 0,
+  "descript": "string",
+  "time": 1,
+  "odd": 0.2,
+  "is_multi": false
+}
+```
+
+>> **NOTE:** the parameter `descript` are **Optional**, in case of the endpoints:
+>>
+>> `post-profits`
+>>
+>> `post-amount`
+>>
+>> `post-multi-bet`
+>>
+>> It is not need because the API override it.
+> 
+>> In `post_profit` it is just Optional.
+
+> `post-multi-bet`
+```json
+{
+  "money": 0,
+  "min_money": 0.5,
+  "my_bets": [
+    {
+      "money": 0,
+      "descript": "string",
+      "time": 1,
+      "odd": 0.2,
+      "is_multi": false
+    }
+  ]
+}
+```
+
+But there's some fields which are **optionals** *(they can be ignored)*, mainly at the first request
+body here. So, I separated an option to solve them.
+
+### Specifics Request Bodies
+Now I present the specifics request bodies from context.
+> `post-profit`
+```json
+{
+  "money": 1000,
+  "odd": 0.2
+}
+```
+
+> `post-profits` Note: `time > 1 and is_multi == true` **required** always.
+```json
+{
+  "money": 100,
+  "odd": 0.2,
+  "time": 2,
+  "is_multi": true
+}
+```
+
+> `post-amount` Note: `time > 1 and is_multi == true` **required** always.
+```json
+{
+  "money": 100,
+  "time": 2,
+  "odd": 0.2,
+  "is_multi": true
+}
+```
+
+> `post-multi-bet` Note: `is_mult == true` **required** always.
+```json
+{
+  "money": 10,
+  "min_money": 0.5,
+  "my_bets": [
+    {
+      "odd": 1.2,
+      "is_multi": true
+    }
+  ]
+}
+```
+
 ## Response Body
+Here I present to you our response model. It's basically a `.json`.
+
+```json
+{
+  "capital": 0.00,
+  "profit": 0.00,
+  "odd": 0.00,
+  "amount": 0.00,
+  "time": 0.00,
+  "descript": "string",
+  "is_multi": false
+}
+```
 
 ## Links FAQ
-
 1. [Python](https://www.python.org/)
 2. [Pip](https://pypi.org/project/pip/)
 3. [FastAPI](https://fastapi.tiangolo.com/)
@@ -168,6 +281,7 @@ page we've a **Links FAQ** to help you to install them.
 1. [Dependencies](#dependencies)
 2. [Endpoints](#endpoints)
    * [Request's Body](#requests-body)
+   * [Specifics Requests Bodies](#specifics-request-bodies)
 3. [Response Body](#requests-body)
 4. [Links FAQ](#links-faq)
 5. [SUMMARY](#summary)
