@@ -1,5 +1,4 @@
-import json
-from json import dumps
+from typing import Dict, Any
 
 from typing import Optional
 
@@ -18,11 +17,11 @@ class MyBet:
     descript: Optional[str] = None
     is_multi: Optional[bool] = False
 
-    def as_json(self) -> json:
-        bet = {
+    def to_dict(self) -> Dict[str, Any]:
+        my_bet_dict = {
             key: value if not isinstance(value, Decimal) else str(value)
             for key, value in self.__dict__.items()
             if key[0] != "_"
         }
 
-        return dumps(bet, indent=4)
+        return my_bet_dict
