@@ -45,10 +45,10 @@ Here you find a `.json` with all links of this API.
 
 ```json
 {
-  "post_profit": "/api/lucrative/profit",
-  "post_profits": "/api/lucrative/profits",
-  "post_amount": "/api/lucrative/amount",
-  "post_multi_bet": "/api/lucrative/multi-bet"
+  "post-earning": "/api/lucrative/earning",
+  "post-earnings": "/api/lucrative/earnings",
+  "post-amounts": "/api/lucrative/amounts",
+  "post-multi-earnings": "/api/lucrative/multi-earnings"
 }
 ```
 
@@ -56,43 +56,43 @@ Here you find a `.json` with all links of this API.
 
 In general we have **2** standards to our requests bodies. They are:
 
-> `post_profit` and `post_profits` and `post_amount`
+> `post-earning` and `post-earnings` and `post-amounts`
 ```json
 {
   "money": 0,
   "descript": "string",
   "time": 1,
-  "odd": 0.2,
+  "earn_rate": 0.2,
   "is_multi": false
 }
 ```
 
 >> **NOTE:** the parameter `descript` are **Optional**, in case of the endpoints:
 >>
->> `post-profits`
+>> `post-earnings`
 >>
->> `post-amount`
+>> `post-amounts`
 >>
->> `post-multi-bet`
+>> `post-multi-earnings`
 >>
 >> It is not need because the API override it.
 > 
->> In `post_profit` it is just Optional.
+>> In `post_earning` it is just Optional.
 
-> `post-multi-bet`
+> `post-multi-earnings`
 ```json
 {
-  "money": 0,
-  "min_money": 0.5,
-  "my_bets": [
-    {
-      "money": 0,
-      "descript": "string",
-      "time": 1,
-      "odd": 0.2,
-      "is_multi": false
-    }
-  ]
+   "money": 0, 
+   "min_money": 0.5, 
+   "my_earnings": [
+      {
+         "money": 0, 
+         "descript": "string", 
+         "time": 1, 
+         "earn_rate": 0.2, 
+         "is_multi": false
+      }
+   ]
 }
 ```
 
@@ -101,45 +101,45 @@ body here. So, I separated an option to solve them.
 
 ### Specifics Request Bodies
 Now I present the specifics request bodies from context.
-> `post-profit`
+> `post-earning`
 ```json
 {
-  "money": 1000,
-  "odd": 0.2
+   "money": 1000, 
+   "earn_rate": 0.2
 }
 ```
 
-> `post-profits` Note: `time > 1 and is_multi == true` **required** always.
+> `post-earnings` Note: `time > 1 and is_multi == true` **required** always.
 ```json
 {
-  "money": 100,
-  "odd": 0.2,
-  "time": 2,
-  "is_multi": true
+   "money": 100, 
+   "earn_rate": 0.05, 
+   "time": 3000, 
+   "is_multi": true
 }
 ```
 
-> `post-amount` Note: `time > 1 and is_multi == true` **required** always.
+> `post-amounts` Note: `time > 1 and is_multi == true` **required** always.
 ```json
 {
-  "money": 100,
-  "time": 2,
-  "odd": 0.2,
-  "is_multi": true
+   "money": 100, 
+   "time": 2, 
+   "odd": 0.2, 
+   "is_multi": true
 }
 ```
 
-> `post-multi-bet` Note: `is_mult == true` **required** always.
+> `post-multi-earnings` Note: `is_mult == true` **required** always.
 ```json
 {
-  "money": 10,
-  "min_money": 0.5,
-  "my_bets": [
-    {
-      "odd": 1.2,
-      "is_multi": true
-    }
-  ]
+   "money": 10, 
+   "min_money": 0.5, 
+   "my_earnings": [
+      {
+         "earn_rate": 1.2, 
+         "is_multi": true
+      }
+   ]
 }
 ```
 
@@ -149,8 +149,8 @@ Here I present to you our response model. It's basically a `.json`.
 ```json
 {
   "capital": 0.00,
-  "profit": 0.00,
-  "odd": 0.00,
+  "lucre_up": 0.00,
+  "earn_rate": 0.00,
   "amount": 0.00,
   "time": 0.00,
   "descript": "string",
